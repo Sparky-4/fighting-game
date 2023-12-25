@@ -12,6 +12,15 @@
 <body onLoad = requestAnimationFrame(start)>
 <canvas></canvas>
 
+<script src="src/StateMachine.js"></script>
+<script src="src/constants.js"></script>
+<script src="src/Animation.js"></script>
+
+<!--js scripts for all states-->
+<script src="src/states/StartState.js"></script>
+<script src="src/states/PlayState.js"></script>
+<script src="src/states/WinState.js"></script>
+<script src="src/states/SelectState.js"></script>
 
 <script>
 
@@ -24,6 +33,20 @@
     // Variables for finding FPS
     const times = [];
     let fps;
+
+    // Load new font from the font files
+    let font = new FontFace('font', 'url(fonts/font.ttf)');
+    font.load().then(function(loaded_face) {
+        document.fonts.add(loaded_face);
+    })
+    
+    // Declare and initialize objects that holds fonts
+    let gFonts = {
+        small: 20*SCALE_FACTOR_WIDTH + "px font",
+        medium: 40*SCALE_FACTOR_WIDTH + "px font",
+        large: 80*SCALE_FACTOR_WIDTH + "px font",
+        other: 10*SCALE_FACTOR_WIDTH + "px Arial"
+    };
 
     // Add event listeners for keydown and keyup and change the array "keys" accordingly
     let keys = [];
@@ -38,14 +61,12 @@
     gStateMachine = new StateMachine({
         start: new StartState(),
         play: new PlayState(),
-        game_over: new GameOverState(),
         win: new WinState(),
         select: new SelectState(),
         });
     gStateMachine.change('start');
 
     function start(){
-        gLevelMaker.generateLevel();
         update();
         draw();
     }
@@ -55,14 +76,6 @@
     * individual parts of the game
     */
     function update(){
-        if(keys[80] && pauseTimer < 0){
-            if(!gSounds.main.paused)
-                gSounds.main.pause();
-            else
-                gSounds.main.play();
-            pauseTimer = 10;
-        }
-        pauseTimer--;
         gStateMachine.update();
         requestAnimationFrame(update);
     }
@@ -71,7 +84,8 @@
     * Draw on the canvas and call the render functions of other necessary parts
     */
     function draw(){ 
-        //ctx.imageSmoothingEnabled = false; 
+        //ctx.imageSmoothingEnabled = false;
+        ctx.fillStyle = 'black';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         displayFPS();
         gStateMachine.render();
@@ -91,9 +105,9 @@
         fps = times.length;
         
         ctx.textAlign = 'left';
-        //ctx.font = gFonts.small;
+        ctx.font = gFonts.small;
         ctx.fillStyle = 'blue';
-        ctx.fillText("FPS: " + fps, 10*SCALE_FACTOR_WIDTH + cameraScroll, 10*SCALE_FACTOR_HEIGHT);
+        ctx.fillText("FPS: " + fps, 20*SCALE_FACTOR_WIDTH, 20*SCALE_FACTOR_HEIGHT);
     }
 
     function randInt(min, max){
@@ -103,6 +117,6 @@
     }
 
 </script>
-<!-- Cooper waz here -->
+
 </body>
 </html>

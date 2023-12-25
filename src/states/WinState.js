@@ -3,7 +3,7 @@ class WinState{
         
     }
 
-    enter(toRender){
+    enter(params){
         
     }
 
