@@ -18,8 +18,8 @@ class StartState{
     * renders the start page
     */
     render(){  
-		ctx.fillStyle = "red";  
-        ctx.fillRect(10, 0, 150, 100);
+		// ctx.fillStyle = "red";  
+        // ctx.fillRect(10, 0, 150, 100);
 		this.sprite.draw();
     }
 
