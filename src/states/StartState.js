@@ -2,7 +2,7 @@ class StartState{
 
     constructor(){
 
-        this.sprite = new Sprite({x:150, y:150}, {x:0, y:0}, 150);
+        this.sprite = new Sprite({x:150, y:150}, {x:0, y:0}, 50, 150);
     }
 
     enter(){}
@@ -18,8 +18,8 @@ class StartState{
     * renders the start page
     */
     render(){  
-		// ctx.fillStyle = "red";  
-        // ctx.fillRect(200, 200, 150, 100);
+		ctx.fillStyle = "red";  
+        ctx.fillRect(10, 0, 150, 100);
 		this.sprite.draw();
     }
 
