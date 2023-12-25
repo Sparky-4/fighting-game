@@ -4,6 +4,10 @@ class Sprite {
         this.velocity = velocity;
         this.width = width;
         this.height = height;
+
+        // needed if sprite crouching is done
+        // this.standingHeight = height;
+        // this.crouchedHeight = height / 2;
     }
 
     draw() {
@@ -12,14 +16,27 @@ class Sprite {
     }
 
     update() {
+
+        // started on possible crouching?
+        // if(keys[83])
+        //     this.height = this.crouchedHeight;
+        // else
+        //     this.height = this.standingHeight;
+
+        // Change in y velocity, includes gravity and checks for space bar input
         this.velocity.y += GRAVITY;
         if (this.position.y + this.height > WINDOW_HEIGHT) {
             this.velocity.y = 0;
-            if (keys[32])
+            if (keys[32]){
                 this.velocity.y = -10;
+                // more crouching things, 
+                // if player is crouched, jump height reduced
+                // if(keys[83])
+                //     this.velocity.y = -5;
+            }
         }
 
-
+        // changes in x position, which is looking for 'a' and 'd' presses
         if (keys[68]) {
             this.velocity.x = 5;
             if (keys[65])
@@ -29,11 +46,13 @@ class Sprite {
         else
             this.velocity.x = 0;
 
-            
+        // Changes y position according to accumulated y velocity
         this.position.y += this.velocity.y;
 
+        // Checks if sprite has hit either side of the window
         if (this.position.x + this.velocity.x + this.width <= WINDOW_WIDTH
             && this.position.x + this.velocity.x > 0)
+            // Changes x position according to accumulated x velocity
             this.position.x += this.velocity.x;
 
     }
