@@ -8,7 +8,8 @@ class Sprite {
 
         this.hitBox = {
             width: 100,
-            height: 50
+            height: 50,
+            timer: 0
         }
         this.isAttacking = false;
         // needed if sprite crouching is done
@@ -21,7 +22,10 @@ class Sprite {
         ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
         if(this.isAttacking){   
             ctx.fillStyle = 'blue';
-            ctx.fillRect(this.position.x, this.position.y + 50, this.hitBox.width, this.hitBox.height);
+            ctx.fillRect(this.position.x, this.position.y + 50, this.hitBox.width - this.hitBox.timer, this.hitBox.height);
+            this.hitBox.timer -= 3;
+        }else{
+            this.hitBox.timer = 50;
         }
     }
 
@@ -66,7 +70,7 @@ class Sprite {
             this.position.x += this.velocity.x;
         
         // Attack upadting
-        this.isAttacking = keys[this.moveKeys.attack];
+        this.isAttacking = keys[this.moveKeys.attack] && this.hitBox.timer == 50 || this.hitBox.timer < 50 && this.hitBox.timer >= 0;
 
 
     }
