@@ -6,6 +6,11 @@ class Sprite {
         this.height = height;
         this.moveKeys = moveKeys;
 
+        this.hitBox = {
+            width: 100,
+            height: 50
+        }
+        this.isAttacking = false;
         // needed if sprite crouching is done
         // this.standingHeight = height;
         // this.crouchedHeight = height / 2;
@@ -14,12 +19,16 @@ class Sprite {
     draw() {
         ctx.fillStyle = 'red';
         ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+        if(this.isAttacking){   
+            ctx.fillStyle = 'blue';
+            ctx.fillRect(this.position.x, this.position.y + 50, this.hitBox.width, this.hitBox.height);
+        }
     }
 
     update() {
 
         // started on possible crouching?
-        // if(keys[83])
+        // if(keys[this.moveKeys.down])
         //     this.height = this.crouchedHeight;
         // else
         //     this.height = this.standingHeight;
@@ -37,7 +46,7 @@ class Sprite {
             }
         }
 
-        // changes in x position, which is looking for 'a' and 'd' presses
+        // changes in x position, which is looking for 'left' and 'right' presses
         if (keys[this.moveKeys.right]) {
             this.velocity.x = 5;
             if (keys[this.moveKeys.left])
@@ -55,6 +64,10 @@ class Sprite {
             && this.position.x + this.velocity.x > 0)
             // Changes x position according to accumulated x velocity
             this.position.x += this.velocity.x;
+        
+        // Attack upadting
+        this.isAttacking = keys[this.moveKeys.attack];
+
 
     }
 }
