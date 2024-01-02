@@ -6,12 +6,10 @@ class Sprite {
         this.height = height;
         this.moveKeys = moveKeys;
 
-        this.hitBox = {
-            width: 100,
-            height: 50,
-            timer: 0
-        }
-        this.isAttacking = false;
+        this.forwardHitbox = new Hitbox(100, 50, 50);
+        this.backwardHitbox = new Hitbox(100, 50, 50);
+        this.downwardHitbox = new Hitbox(100, 50, 50);
+        
         this.facing = false; // where left is false and right is true
         // needed if sprite crouching is done
         // this.standingHeight = height;
@@ -21,15 +19,15 @@ class Sprite {
     draw() {
         ctx.fillStyle = 'red';
         ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
-        if(this.isAttacking){   
+        if(this.forwardHitbox.isAttacking){   
             ctx.fillStyle = 'blue';
             if(this.facing)
-                ctx.fillRect(this.position.x, this.position.y + 50, this.hitBox.width - this.hitBox.timer, this.hitBox.height);
+                ctx.fillRect(this.position.x, this.position.y + 50, this.forwardHitbox.width - this.forwardHitbox.timer, this.forwardHitbox.height);
             else
-                ctx.fillRect(this.position.x + this.width, this.position.y + 50, -(this.hitBox.width - this.hitBox.timer), this.hitBox.height);
-            this.hitBox.timer -= 3;
+                ctx.fillRect(this.position.x + this.width, this.position.y + 50, -(this.forwardHitbox.width - this.forwardHitbox.timer), this.forwardHitbox.height);
+            this.forwardHitbox.timer -= 3;
         }else{
-            this.hitBox.timer = 50;
+            this.forwardHitbox.timer = 50;
         }
     }
 
@@ -78,7 +76,7 @@ class Sprite {
             this.facing = this.velocity.x > 0;
         
         // Attack updating
-        this.isAttacking = keys[this.moveKeys.attack] && this.hitBox.timer == 50 || this.hitBox.timer < 50 && this.hitBox.timer >= 0;
+        this.forwardHitbox.isAttacking = keys[this.moveKeys.attack] && this.forwardHitbox.timer == 50 || this.forwardHitbox.timer < 50 && this.forwardHitbox.timer >= 0;
 
 
     }
