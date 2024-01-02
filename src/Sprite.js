@@ -1,9 +1,10 @@
 class Sprite {
-    constructor(position, velocity, width, height) {
+    constructor(position, velocity, width, height, moveKeys) {
         this.position = position;
         this.velocity = velocity;
         this.width = width;
         this.height = height;
+        this.moveKeys = moveKeys;
 
         // needed if sprite crouching is done
         // this.standingHeight = height;
@@ -27,8 +28,8 @@ class Sprite {
         this.velocity.y += GRAVITY;
         if (this.position.y + this.height > WINDOW_HEIGHT) {
             this.velocity.y = 0;
-            if (keys[32]){
-                this.velocity.y = -10;
+            if (keys[this.moveKeys.up]){
+                this.velocity.y = -5;
                 // more crouching things, 
                 // if player is crouched, jump height reduced
                 // if(keys[83])
@@ -37,11 +38,11 @@ class Sprite {
         }
 
         // changes in x position, which is looking for 'a' and 'd' presses
-        if (keys[68]) {
+        if (keys[this.moveKeys.right]) {
             this.velocity.x = 5;
-            if (keys[65])
+            if (keys[this.moveKeys.left])
                 this.velocity.x = 0;
-        } else if (keys[65])
+        } else if (keys[this.moveKeys.left])
             this.velocity.x = -5;
         else
             this.velocity.x = 0;
