@@ -12,6 +12,7 @@ class Sprite {
             timer: 0
         }
         this.isAttacking = false;
+        this.facing = false; // where left is false and right is true
         // needed if sprite crouching is done
         // this.standingHeight = height;
         // this.crouchedHeight = height / 2;
@@ -22,7 +23,10 @@ class Sprite {
         ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
         if(this.isAttacking){   
             ctx.fillStyle = 'blue';
-            ctx.fillRect(this.position.x, this.position.y + 50, this.hitBox.width - this.hitBox.timer, this.hitBox.height);
+            if(this.facing)
+                ctx.fillRect(this.position.x, this.position.y + 50, this.hitBox.width - this.hitBox.timer, this.hitBox.height);
+            else
+                ctx.fillRect(this.position.x + this.width, this.position.y + 50, -(this.hitBox.width - this.hitBox.timer), this.hitBox.height);
             this.hitBox.timer -= 3;
         }else{
             this.hitBox.timer = 50;
@@ -68,8 +72,12 @@ class Sprite {
             && this.position.x + this.velocity.x > 0)
             // Changes x position according to accumulated x velocity
             this.position.x += this.velocity.x;
+
+        // facing updating
+        if(this.velocity.x != 0)
+            this.facing = this.velocity.x > 0;
         
-        // Attack upadting
+        // Attack updating
         this.isAttacking = keys[this.moveKeys.attack] && this.hitBox.timer == 50 || this.hitBox.timer < 50 && this.hitBox.timer >= 0;
 
 
