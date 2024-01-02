@@ -6,10 +6,19 @@ class Sprite {
         this.height = height;
         this.moveKeys = moveKeys;
 
-        this.forwardHitbox = new Hitbox(100, 50, 50);
-        this.backwardHitbox = new Hitbox(100, 50, 50);
-        this.downwardHitbox = new Hitbox(100, 50, 50);
-        
+        this.forwardHitbox = {
+            width: 100,
+            height: 50,
+            timer: 0,
+            isAttacking: false
+        }
+
+        // For when I figure out classes
+        // this.forwardHitbox = new Hitbox(100, 50, 50);
+        // this.backwardHitbox = new Hitbox(100, 50, 50);
+        // this.downwardHitbox = new Hitbox(100, 50, 50);
+
+
         this.facing = false; // where left is false and right is true
         // needed if sprite crouching is done
         // this.standingHeight = height;
