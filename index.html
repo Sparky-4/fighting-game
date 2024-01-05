@@ -16,6 +16,9 @@
 <script src="src/constants.js"></script>
 <script src="src/Animation.js"></script>
 <script src="src/Sprite.js"></script>
+<script src="src/Quad.js"></script>
+<script src="src/Util.js"></script>
+<script src="src/Timer.js"></script>
 
 <!--js scripts for all states-->
 <script src="src/states/StartState.js"></script>
@@ -48,6 +51,21 @@
         large: 80*SCALE_FACTOR_WIDTH + "px font",
         other: 10*SCALE_FACTOR_WIDTH + "px Arial"
     };
+
+    // Declare all images as image objects in a global textures object
+    let gTextures = {
+        background: new Image(1024, 576),
+        shop: new Image(708, 128),
+    };
+
+    // Initialize all images from files
+    gTextures.background.src = "graphics/background.png";
+    gTextures.shop.src = "graphics/shop.png";
+
+    gFrames = {
+        background: GenerateQuads(gTextures.background, 1024, 576, 1024, 576),
+        shop: GenerateQuads(gTextures.shop, 118, 128, 324.5, 352),
+    }
 
     // Add event listeners for keydown and keyup and change the array "keys" accordingly
     let keys = [];
@@ -86,10 +104,9 @@
     */
     function draw(){ 
         //ctx.imageSmoothingEnabled = false;
-        ctx.fillStyle = 'black';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        displayFPS();
+        gFrames.background[0].draw(0, 0);
         gStateMachine.render();
+        displayFPS();
         requestAnimationFrame(draw);
     }
 
