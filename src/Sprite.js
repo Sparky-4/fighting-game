@@ -76,7 +76,7 @@ class Sprite {
 
     handleDamage(other){
         if(other.forwardHitbox.isAttacking && this.collides(other.forwardHitbox)){
-            this.health = Math.max(0, this.health-10);
+            this.health = Math.max(0, this.health-16);
         }
     }
 
@@ -90,12 +90,14 @@ class Sprite {
 
         this.handleMovement();
 
-        if(keys[this.moveKeys.attack] && this.forwardHitbox.timer == 0){
+        if(keys[this.moveKeys.attack] && this.forwardHitbox.timer == 0)
+            this.forwardHitbox.timer = 20;
+        if (this.forwardHitbox.timer == 15){
             this.forwardHitbox.isAttacking = true;
             this.forwardHitbox.x = this.facing?this.position.x:this.position.x-(this.forwardHitbox.width - this.width);
             this.forwardHitbox.y = this.position.y + 50;
-            this.forwardHitbox.timer = 10;
-        } else
+        }
+        else
             this.forwardHitbox.isAttacking = false;
         if(this.forwardHitbox.timer > 0)
             this.forwardHitbox.timer--;

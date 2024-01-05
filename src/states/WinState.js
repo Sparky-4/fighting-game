@@ -8,6 +8,7 @@ class WinState{
         this.enemy = params[1];
         this.winner = params[2];
         this.time = params[3];
+        this.shopAnim = new Animation([0, 1, 2, 3, 4, 5], 6);
     }
 
     /*
@@ -16,12 +17,17 @@ class WinState{
     update(){
         if(keys[13])
             location.reload();
+        this.shopAnim.update();
     }
 
     /*
     * renders the start page
     */
     render(){   
+        //shop
+        gFrames.shop[this.shopAnim.getCurFrame()].draw(600*SCALE_FACTOR_WIDTH, 128*SCALE_FACTOR_HEIGHT);
+
+        //players
         this.player.draw();
 		this.enemy.draw();
 
