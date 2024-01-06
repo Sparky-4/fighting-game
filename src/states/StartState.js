@@ -2,9 +2,9 @@ class StartState{
 
     constructor(){
         // Player keys are standard WASD and X to attack
-        this.player = new Sprite({x:150, y:(WINDOW_HEIGHT - 150)}, {x:0, y:0}, 50, 150, {up:87, down:83, left:65, right:68, attack: 88}, 1);
+        this.player = new Sprite({x:150, y:(WINDOW_HEIGHT - 150)}, {x:0, y:0}, 100, 150, {up:87, down:83, left:65, right:68, attack: 88}, 1);
         // enemay is IJKL with N to attack
-        this.enemy = new Sprite({x:750, y:(WINDOW_HEIGHT - 150)}, {x:0, y:0}, 50, 150, {up:73, down:75, left:74, right:76, attack: 78}, 2);
+        this.enemy = new Sprite({x:750, y:(WINDOW_HEIGHT - 150)}, {x:0, y:0}, 100, 150, {up:73, down:75, left:74, right:76, attack: 78}, 2);
         //{up:38, down:40, left:37, right:39, attack: 191} alternate controls, the arrow keys and slash
 
         this.shopAnim = new Animation([0, 1, 2, 3, 4, 5], 6);
@@ -65,9 +65,6 @@ class StartState{
       ctx.textBaseline = 'alphabetic';
       ctx.font = gFonts.medium;
       ctx.fillText(this.time, 512*SCALE_FACTOR_WIDTH, 55*SCALE_FACTOR_HEIGHT);
-
-      
-
     }
 
 }
