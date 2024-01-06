@@ -64,6 +64,14 @@
         mackAttack2: new Image(1200, 200),
         mackDeath: new Image(1200, 200),
         mackHit: new Image(800, 200),
+        kenjiIdle: new Image(800, 200),
+        kenjiRun: new Image(1600, 200),
+        kenjiJump: new Image(400, 200),
+        kenjiFall: new Image(400, 200),
+        kenjiAttack1: new Image(800, 200),
+        kenjiAttack2: new Image(800, 200),
+        kenjiDeath: new Image(1400, 200),
+        kenjiHit: new Image(800, 200),
     };
 
     // Initialize all images from files
@@ -72,16 +80,25 @@
     gTextures.mackIdle.src = "graphics/mack/Idle.png";
     gTextures.mackRun.src = "graphics/mack/Run.png";
     gTextures.mackJump.src = "graphics/mack/Jump.png";
-    gTextures.mackJump.src = "graphics/mack/Fall.png";
+    gTextures.mackFall.src = "graphics/mack/Fall.png";
     gTextures.mackAttack1.src = "graphics/mack/Attack1.png";
     gTextures.mackAttack2.src = "graphics/mack/Attack2.png";
     gTextures.mackDeath.src = "graphics/mack/Death.png";
     gTextures.mackHit.src = "graphics/mack/Take Hit - white silhouette.png";
+    gTextures.kenjiIdle.src = "graphics/kenji/Idle.png";
+    gTextures.kenjiRun.src = "graphics/kenji/Run.png";
+    gTextures.kenjiJump.src = "graphics/kenji/Jump.png";
+    gTextures.kenjiFall.src = "graphics/kenji/Fall.png";
+    gTextures.kenjiAttack1.src = "graphics/kenji/Attack1.png";
+    gTextures.kenjiAttack2.src = "graphics/kenji/Attack2.png";
+    gTextures.kenjiDeath.src = "graphics/kenji/Death.png";
+    gTextures.kenjiHit.src = "graphics/kenji/Take hit.png";
 
     gFrames = {
         background: GenerateQuads(gTextures.background, 1024, 576, 1024, 576),
         shop: GenerateQuads(gTextures.shop, 118, 128, 324.5, 352),
         mackRight: GenerateMackRight(),
+        kenjiRight: GenerateKenjiRight(),
     }
 
     // Add event listeners for keydown and keyup and change the array "keys" accordingly

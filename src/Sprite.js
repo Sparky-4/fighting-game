@@ -1,5 +1,5 @@
 class Sprite {
-    constructor(position, velocity, width, height, moveKeys, healthPos) {
+    constructor(position, velocity, width, height, moveKeys, healthPos, sprites, animations) {
         this.position = position;
         this.velocity = velocity;
         this.width = width;
@@ -8,16 +8,8 @@ class Sprite {
         this.health = 100;
         this.healthPos = healthPos;
         this.hitstun = 0;
-        this.animations = {
-            idle: new Animation([0, 1, 2, 3, 4, 5, 6, 7], 4),
-            run: new Animation([8, 9, 10, 11, 12, 13, 14, 15], 10),
-            jump: new Animation([16, 17], 60),
-            fall: new Animation([18, 19], 60),
-            attack1: new Animation([20, 21, 22, 23, 24, 25], 10),
-            attack2: new Animation([26, 27, 28, 29, 30, 31], 10),
-            death: new Animation([32, 33, 34, 35, 36, 37], 7),
-            hit: new Animation([38, 39, 40, 41], 7),
-        };
+        this.sprites = sprites;
+        this.animations = animations;
         this.curAnimation = this.animations.idle;
         this.display = {
             message: '',
@@ -97,6 +89,7 @@ class Sprite {
         if(other.forwardHitbox.isAttacking && this.collides(other.forwardHitbox)){
             this.health = Math.max(0, this.health-16);
             this.hitstun = other.forwardHitbox.hitstun;
+            this.resetAnimations(10, other.forwardHitbox.hitstun);
             if(this.forwardHitbox.startup > 0){
                 this.display.message = 'COUNTER!';
                 this.display.frames = other.forwardHitbox.hitstun;
@@ -122,13 +115,20 @@ class Sprite {
         else if (this.forwardHitbox.startup > 0 || this.forwardHitbox.recovery > 0)
             this.curAnimation = this.animations.attack1;
         else if (this.velocity.y > 0)
-            this.curAnimation = this.animations.jump;
-        else if (this.velocity.y < 0)
             this.curAnimation = this.animations.fall;
+        else if (this.velocity.y < 0)
+            this.curAnimation = this.animations.jump;
         else if (this.velocity.x != 0)
             this.curAnimation = this.animations.run;
         else
             this.curAnimation = this.animations.idle;
+        this.curAnimation.update();
+    }
+
+    resetAnimations(attackNum, hitNum){
+        this.animations.attack1.reset(attackNum);
+        this.animations.attack2.reset(attackNum);
+        this.animations.hit.reset(hitNum);
     }
 
     update() {
@@ -140,10 +140,10 @@ class Sprite {
         //     this.height = this.standingHeight;
 
         this.handleMovement();
-        this.curAnimation.update();
         
         if(keys[this.moveKeys.attack] && this.forwardHitbox.startup == 0 && this.forwardHitbox.recovery == 0 && this.hitstun == 0){
             this.forwardHitbox.startup = 20;
+            this.resetAnimations(60, 7);
         }
         if (this.forwardHitbox.startup == 1){
             this.forwardHitbox.isAttacking = true;
@@ -166,14 +166,13 @@ class Sprite {
             //console.log('hitstun: ' + this.hitstun);
         }
 
-        this.handleAnimation();
-
     }
 
     draw() {
+        this.handleAnimation();
         ctx.fillStyle = 'red';
         ctx.fillRect(this.position.x*SCALE_FACTOR_WIDTH, this.position.y*SCALE_FACTOR_HEIGHT, this.width*SCALE_FACTOR_WIDTH, this.height*SCALE_FACTOR_HEIGHT);
-        gFrames.mackRight[this.curAnimation.getCurFrame()].draw(this.position.x*SCALE_FACTOR_WIDTH, this.position.y*SCALE_FACTOR_HEIGHT);
+        this.sprites[this.curAnimation.getCurFrame()].draw(this.position.x*SCALE_FACTOR_WIDTH, this.position.y*SCALE_FACTOR_HEIGHT);
         
         if(this.forwardHitbox.isAttacking){   
             ctx.fillStyle = 'blue';

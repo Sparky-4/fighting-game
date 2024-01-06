@@ -17,6 +17,12 @@ class Animation{
         }
     }
 
+    reset(total){
+        this.timer = new Timer();
+        this.curFrame = 0;
+        this.interval = total/this.frames.length;
+    }
+
     getCurFrame(){
         return this.frames[this.curFrame];
     }

@@ -2,9 +2,40 @@ class StartState{
 
     constructor(){
         // Player keys are standard WASD and X to attack
-        this.player = new Sprite({x:150, y:(WINDOW_HEIGHT - 150)}, {x:0, y:0}, 100, 150, {up:87, down:83, left:65, right:68, attack: 88}, 1);
-        // enemay is IJKL with N to attack
-        this.enemy = new Sprite({x:750, y:(WINDOW_HEIGHT - 150)}, {x:0, y:0}, 100, 150, {up:73, down:75, left:74, right:76, attack: 78}, 2);
+        this.player = new Sprite(
+          {x:150, y:(WINDOW_HEIGHT - 150)}, 
+          {x:0, y:0},
+          100, 150, 
+          {up:87, down:83, left:65, right:68, attack: 88},
+          1, gFrames.mackRight,
+          {
+            idle: new Animation([0, 1, 2, 3, 4, 5, 6, 7], 4),
+            run: new Animation([8, 9, 10, 11, 12, 13, 14, 15], 5),
+            jump: new Animation([16, 17], 60),
+            fall: new Animation([18, 19], 60),
+            attack1: new Animation([20, 21, 22, 23, 24, 25], 5),
+            attack2: new Animation([26, 27, 28, 29, 30, 31], 10),
+            death: new Animation([32, 33, 34, 35, 36, 37], 7),
+            hit: new Animation([38, 39, 40, 41], 7),
+          });
+
+        // enemy is IJKL with N to attack
+        this.enemy = new Sprite(
+          {x:750, y:(WINDOW_HEIGHT - 150)},
+          {x:0, y:0},
+          100, 150,
+          {up:73, down:75, left:74, right:76, attack: 78},
+          2, gFrames.kenjiRight,
+          {
+            idle: new Animation([0, 1, 2, 3], 4),
+            run: new Animation([4, 5, 6, 7, 8, 9, 10, 11], 5),
+            jump: new Animation([12, 13], 60),
+            fall: new Animation([14, 15], 60),
+            attack1: new Animation([19, 18, 17, 16], 5),
+            attack2: new Animation([23, 22, 21, 20], 10),
+            death: new Animation([24, 25, 26, 27, 28, 29, 30], 7),
+            hit: new Animation([31, 32, 33, 34], 7),
+          });
         //{up:38, down:40, left:37, right:39, attack: 191} alternate controls, the arrow keys and slash
 
         this.shopAnim = new Animation([0, 1, 2, 3, 4, 5], 6);

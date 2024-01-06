@@ -46,6 +46,21 @@ function GenerateMackRight(){
 	}
 	let spriteSheet = mackFrames.mackIdle.concat(mackFrames.mackRun, mackFrames.mackJump, mackFrames.mackFall, 
 		mackFrames.mackAttack1, mackFrames.mackAttack2, mackFrames.mackDeath, mackFrames.mackHit);
-		console.log(spriteSheet)
+	return spriteSheet;
+}
+
+function GenerateKenjiRight(){
+	let kenjiFrames = {
+		kenjiIdle: getMiddle(GenerateQuads(gTextures.kenjiIdle, 200, 200, 200, 200), 36, 54, 100, 150),
+        kenjiRun: getMiddle(GenerateQuads(gTextures.kenjiRun, 200, 200, 200, 200), 36, 54, 100, 150),
+        kenjiJump: getMiddle(GenerateQuads(gTextures.kenjiJump, 200, 200, 200, 200), 36, 54, 100, 150),
+        kenjiFall: getMiddle(GenerateQuads(gTextures.kenjiFall, 200, 200, 200, 200), 36, 54, 100, 150),
+        kenjiAttack1: getMiddle(GenerateQuads(gTextures.kenjiAttack1, 200, 200, 200, 200), 36, 54, 100, 150),
+        kenjiAttack2: getMiddle(GenerateQuads(gTextures.kenjiAttack2, 200, 200, 200, 200), 36, 54, 100, 150),
+        kenjiDeath: getMiddle(GenerateQuads(gTextures.kenjiDeath, 200, 200, 200, 200), 36, 54, 100, 150),
+        kenjiHit: getMiddle(GenerateQuads(gTextures.kenjiHit, 200, 200, 200, 200), 36, 54, 100, 150),
+	}
+	let spriteSheet = kenjiFrames.kenjiIdle.concat(kenjiFrames.kenjiRun, kenjiFrames.kenjiJump, kenjiFrames.kenjiFall, 
+		kenjiFrames.kenjiAttack1, kenjiFrames.kenjiAttack2, kenjiFrames.kenjiDeath, kenjiFrames.kenjiHit);
 	return spriteSheet;
 }
