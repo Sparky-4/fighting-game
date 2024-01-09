@@ -6,7 +6,7 @@ class StartState{
           {x:150, y:(WINDOW_HEIGHT - 150)}, 
           {x:0, y:0},
           100, 150, 
-          {up:87, down:83, left:65, right:68, attack: 88},
+          {up:87, down:83, left:65, right:68, attack: 83},
           1, gFrames.mackRight,
           {
             idle: new Animation([0, 1, 2, 3, 4, 5, 6, 7], 5),
@@ -24,11 +24,11 @@ class StartState{
           {x:750, y:(WINDOW_HEIGHT - 150)},
           {x:0, y:0},
           100, 150,
-          {up:73, down:75, left:74, right:76, attack: 78},
+          {up:38, down:40, left:37, right:39, attack: 40},
           2, gFrames.kenjiRight,
           {
             idle: new Animation([0, 1, 2, 3], 7),
-            run: new Animation([4, 5, 6, 7, 8, 9, 10, 11], 5),
+            run: new Animation([11, 10, 9, 8, 7, 6, 5, 4], 5),
             jump: new Animation([12, 13], 60),
             fall: new Animation([14, 15], 60),
             attack1: new Animation([19, 18, 17, 16], 5),
@@ -68,14 +68,23 @@ class StartState{
 
       this.shopAnim.update();
 
-      if(this.player.health == 0)
+      if(this.player.health == 0){
+        this.player.end('lost');
+        this.enemy.end('win');
         gStateMachine.change('win', [this.player, this.enemy, 'Player 2', this.time]);
-      else if(this.enemy.health == 0)
+      }
+      else if(this.enemy.health == 0){
+        this.player.end('win');
+        this.enemy.end('lost');
         gStateMachine.change('win', [this.player, this.enemy, 'Player 1', this.time]);
-      else if(this.time == 0)
+      }
+      else if(this.time == 0){
+        this.player.end('timed');
+        this.enemy.end('timed');
         gStateMachine.change('win', this.player.health>this.enemy.health?
         [this.player, this.enemy, 'Player 1', this.time]:this.player.health==this.enemy.health?[this.player, this.enemy, 'Nobody', this.time]:
         [this.player, this.enemy, 'Player 2', this.time]);
+      }
     }
 
     /*
