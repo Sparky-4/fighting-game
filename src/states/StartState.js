@@ -9,7 +9,7 @@ class StartState{
           {up:87, down:83, left:65, right:68, attack: 88},
           1, gFrames.mackRight,
           {
-            idle: new Animation([0, 1, 2, 3, 4, 5, 6, 7], 4),
+            idle: new Animation([0, 1, 2, 3, 4, 5, 6, 7], 5),
             run: new Animation([8, 9, 10, 11, 12, 13, 14, 15], 5),
             jump: new Animation([16, 17], 60),
             fall: new Animation([18, 19], 60),
@@ -27,7 +27,7 @@ class StartState{
           {up:73, down:75, left:74, right:76, attack: 78},
           2, gFrames.kenjiRight,
           {
-            idle: new Animation([0, 1, 2, 3], 4),
+            idle: new Animation([0, 1, 2, 3], 7),
             run: new Animation([4, 5, 6, 7, 8, 9, 10, 11], 5),
             jump: new Animation([12, 13], 60),
             fall: new Animation([14, 15], 60),

@@ -18,11 +18,11 @@ class Sprite {
         this.forwardHitbox = {
             x: this.position.x,
             y: this.position.y + 50,
-            width: 100,
+            width: 200,
             height: 50,
             startup: 0,
             recovery: 0,
-            hitstun: 40,
+            hitstun: 10,
             isAttacking: false
         }
         this.facing = false; // where left is false and right is true
@@ -76,7 +76,8 @@ class Sprite {
             if(this.velocity.x != 0)
                 this.facing = this.velocity.x > 0;
         }
-
+        if(this.forwardHitbox.recovery > 0)
+            this.velocity.x = 0;
         this.position.x += this.velocity.x;
         // correct x if sprite has hit either side of the window
         if (this.position.x + this.width > VIRTUAL_WIDTH)
@@ -92,18 +93,18 @@ class Sprite {
             this.resetAnimations(10, other.forwardHitbox.hitstun);
             if(this.forwardHitbox.startup > 0){
                 this.display.message = 'COUNTER!';
-                this.display.frames = other.forwardHitbox.hitstun;
+                this.display.frames = 40;
             }else if (this.forwardHitbox.recovery > 0){
                 this.display.message = 'PUNISH!';
-                this.display.frames = other.forwardHitbox.hitstun;
+                this.display.frames = 40;
             }
             this.forwardHitbox.startup = 0;
             this.forwardHitbox.recovery = 0;
             if(this.position.x+this.width/2 > other.position.x+other.width/2){
-                this.velocity.x = 2;
+                this.velocity.x = 10;
                 this.facing = false;
             }else{
-                this.velocity.x = -2;
+                this.velocity.x = -10;
                 this.facing = true;
             }
         }
@@ -142,14 +143,14 @@ class Sprite {
         this.handleMovement();
         
         if(keys[this.moveKeys.attack] && this.forwardHitbox.startup == 0 && this.forwardHitbox.recovery == 0 && this.hitstun == 0){
-            this.forwardHitbox.startup = 20;
-            this.resetAnimations(60, 7);
+            this.forwardHitbox.startup = 10;
+            this.resetAnimations(30, 10);
         }
         if (this.forwardHitbox.startup == 1){
             this.forwardHitbox.isAttacking = true;
             this.forwardHitbox.x = this.facing?this.position.x:this.position.x-(this.forwardHitbox.width - this.width);
             this.forwardHitbox.y = this.position.y + 50;
-            this.forwardHitbox.recovery = 40;
+            this.forwardHitbox.recovery = 20;
         }
         else
             this.forwardHitbox.isAttacking = false;
@@ -172,13 +173,22 @@ class Sprite {
         this.handleAnimation();
         ctx.fillStyle = 'red';
         ctx.fillRect(this.position.x*SCALE_FACTOR_WIDTH, this.position.y*SCALE_FACTOR_HEIGHT, this.width*SCALE_FACTOR_WIDTH, this.height*SCALE_FACTOR_HEIGHT);
-        this.sprites[this.curAnimation.getCurFrame()].draw(this.position.x*SCALE_FACTOR_WIDTH, this.position.y*SCALE_FACTOR_HEIGHT);
-        
-        if(this.forwardHitbox.isAttacking){   
-            ctx.fillStyle = 'blue';
-            ctx.fillRect(this.forwardHitbox.x*SCALE_FACTOR_WIDTH, this.forwardHitbox.y*SCALE_FACTOR_HEIGHT, 
-                this.forwardHitbox.width*SCALE_FACTOR_WIDTH, this.forwardHitbox.height*SCALE_FACTOR_HEIGHT);
+        if((this.facing && this.healthPos==1) || (!this.facing && this.healthPos == 2)){
+            //this.sprites[this.curAnimation.getCurFrame()].xOffset = 0;
+            this.sprites[this.curAnimation.getCurFrame()].draw(this.position.x*SCALE_FACTOR_WIDTH, this.position.y*SCALE_FACTOR_HEIGHT);
         }
+        else{
+            //this.sprites[this.curAnimation.getCurFrame()].xOffset = this.width;
+            this.sprites[this.curAnimation.getCurFrame()].drawReversed(this.position.x*SCALE_FACTOR_WIDTH, this.position.y*SCALE_FACTOR_HEIGHT);
+        }
+
+
+        //Attackbox
+        // if(this.forwardHitbox.isAttacking){   
+        //     ctx.fillStyle = 'blue';
+        //     ctx.fillRect(this.forwardHitbox.x*SCALE_FACTOR_WIDTH, this.forwardHitbox.y*SCALE_FACTOR_HEIGHT, 
+        //         this.forwardHitbox.width*SCALE_FACTOR_WIDTH, this.forwardHitbox.height*SCALE_FACTOR_HEIGHT);
+        // }
 
         //Health bar
         ctx.fillStyle = 'red';

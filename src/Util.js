@@ -33,13 +33,58 @@ function getMiddle(spriteSheet, width, height, vWidth, vHeight){
 	return spriteSheet;
 }
 
+function getMackAttack(spriteSheet){
+	for(let i = 0; i < spriteSheet.length; i++){
+		spriteSheet[i].width = 40;
+		spriteSheet[i].vWidth = 100;
+		spriteSheet[i].height = 54;
+		spriteSheet[i].vHeight = 150;
+		spriteSheet[i].y = 68;
+		spriteSheet[i].xOffset = -3;
+		
+	}
+
+	spriteSheet[0].x = 71;
+	spriteSheet[1].x = 269;
+	spriteSheet[2].x = 471;
+	spriteSheet[3].x = 673;
+
+	spriteSheet[4].x = 882;
+	spriteSheet[4].y = 52;
+	spriteSheet[4].width = 107;
+	spriteSheet[4].height = 69;
+	spriteSheet[4].vWidth = 268;
+	spriteSheet[4].vHeight = 173;
+	spriteSheet[4].yOffset = -23;
+	
+	spriteSheet[5].x = 1082;
+	spriteSheet[5].y = 52;
+	spriteSheet[5].width = 107;
+	spriteSheet[5].height = 69;
+	spriteSheet[5].vWidth = 268;
+	spriteSheet[5].vHeight = 173;
+	spriteSheet[5].yOffset = -23;
+
+	return spriteSheet;
+}
+
+function offset(spriteSheet){
+	for(let i = 0; i < spriteSheet.length; i++){
+		spriteSheet[i].yOffset = -189;
+		spriteSheet[i].xOffset = -211;
+	}
+	return spriteSheet;
+}
+
 function GenerateMackRight(){
 	let mackFrames = {
-		mackIdle: getMiddle(GenerateQuads(gTextures.mackIdle, 200, 200, 200, 200), 36, 54, 100, 150),
-        mackRun: getMiddle(GenerateQuads(gTextures.mackRun, 200, 200, 200, 200), 36, 54, 100, 150),
-        mackJump: getMiddle(GenerateQuads(gTextures.mackJump, 200, 200, 200, 200), 36, 54, 100, 150),
-        mackFall: getMiddle(GenerateQuads(gTextures.mackFall, 200, 200, 200, 200), 36, 54, 100, 150),
-        mackAttack1: getMiddle(GenerateQuads(gTextures.mackAttack1, 200, 200, 200, 200), 36, 54, 100, 150),
+		mackIdle: offset(GenerateQuads(gTextures.mackIdle, 200, 200, 555, 555)),
+		// mackIdle: getMiddle(GenerateQuads(gTextures.mackIdle, 200, 200, 200, 200), 36, 54, 100, 150),
+        mackRun: offset(GenerateQuads(gTextures.mackRun, 200, 200, 555, 555)),
+        // mackRun: getMiddle(GenerateQuads(gTextures.mackRun, 200, 200, 200, 200), 47, 54, 130, 150),
+        mackJump: getMiddle(GenerateQuads(gTextures.mackJump, 200, 200, 200, 200), 38, 54, 106, 150),
+        mackFall: getMiddle(GenerateQuads(gTextures.mackFall, 200, 200, 200, 200), 48, 54, 134, 150),
+        mackAttack1: getMackAttack(GenerateQuads(gTextures.mackAttack1, 200, 200, 200, 200)),
         mackAttack2: getMiddle(GenerateQuads(gTextures.mackAttack2, 200, 200, 200, 200), 36, 54, 100, 150),
         mackDeath: getMiddle(GenerateQuads(gTextures.mackDeath, 200, 200, 200, 200), 36, 54, 100, 150),
         mackHit: getMiddle(GenerateQuads(gTextures.mackHit, 200, 200, 200, 200), 36, 54, 100, 150),
