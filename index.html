@@ -141,6 +141,11 @@
         gFrames.background[0].draw(0, 0);
         gStateMachine.render();
         displayFPS();
+        ctx.textAlign = 'right';
+        ctx.textBaseline = 'bottom'
+        ctx.font = gFonts.small;
+        ctx.fillStyle = 'white';
+        ctx.fillText("V1.0", WINDOW_WIDTH, WINDOW_HEIGHT);
         requestAnimationFrame(draw);
     }
 
