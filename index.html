@@ -37,6 +37,9 @@
     // Variables for finding FPS
     const times = [];
     let fps;
+    let msPrev = window.performance.now()
+    const vFPS = 60
+    const msPerFrame = 1000 / fps
 
     // Load new font from the font files
     let font = new FontFace('font', 'url(fonts/font.ttf)');
@@ -129,8 +132,15 @@
     * individual parts of the game
     */
     function update(){
-        gStateMachine.update();
         requestAnimationFrame(update);
+        const msNow = window.performance.now()
+        const msPassed = msNow - msPrev
+
+        if (msPassed < msPerFrame) return
+
+        const excessTime = msPassed % msPerFrame
+        msPrev = msNow - excessTime
+        gStateMachine.update();
     }
 
     /*
