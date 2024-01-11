@@ -148,7 +148,7 @@
     * Draw on the canvas and call the render functions of other necessary parts
     */
     function draw(){ 
-        //ctx.imageSmoothingEnabled = false;
+        ctx.imageSmoothingEnabled = false;
         gFrames.background[0].draw(0, 0);
         gStateMachine.render();
         displayFPS();
@@ -157,7 +157,6 @@
         ctx.font = gFonts.small;
         ctx.fillStyle = 'white';
         ctx.fillText("V" + VERSION, WINDOW_WIDTH, WINDOW_HEIGHT);
-        //requestAnimationFrame(draw);
     }
 
     /*
