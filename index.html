@@ -133,13 +133,13 @@
     */
     function update(){
         requestAnimationFrame(update);
-        const msNow = window.performance.now()
-        const msPassed = msNow - msPrev
+        const msNow = window.performance.now();
+        const msPassed = msNow - msPrev;
 
-        if (msPassed < msPerFrame) return
+        if (msPassed < msPerFrame) return;
 
-        const excessTime = msPassed % msPerFrame
-        msPrev = msNow - excessTime
+        const excessTime = msPassed % msPerFrame;
+        msPrev = msNow - excessTime;
         gStateMachine.update();
         requestAnimationFrame(draw);
     }
