@@ -197,7 +197,7 @@ class Sprite {
             sword.src = gSounds.sword.src;
             sword.volume = .5;
             sword.play();
-            if(randInt(0, 250) == 0)
+            if(randInt(0, 2000) == 0)
                 gSounds.song.play();
             this.resetAnimations(30, 10);
         }
