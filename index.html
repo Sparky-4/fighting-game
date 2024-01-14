@@ -55,6 +55,46 @@
         other: 10*SCALE_FACTOR_WIDTH + "px Arial"
     };
 
+    // Declare all sounds as audio objects in a global sounds object
+    let gSounds = {
+        counter: document.createElement("AUDIO"),
+        cucumber: document.createElement("AUDIO"),
+        hit: document.createElement("AUDIO"),
+        kenjiDeath: document.createElement("AUDIO"),
+        kenjiHurt: document.createElement("AUDIO"),
+        kenjiJump: document.createElement("AUDIO"),
+        kenjiWin: document.createElement("AUDIO"),
+        mackDeath: document.createElement("AUDIO"),
+        mackHurt: document.createElement("AUDIO"),
+        mackJump: document.createElement("AUDIO"),
+        mackWin: document.createElement("AUDIO"),
+        nobodyWin: document.createElement("AUDIO"),
+        nobodyWin2: document.createElement("AUDIO"),
+        peanut: document.createElement("AUDIO"),
+        punish: document.createElement("AUDIO"),
+        song: document.createElement("AUDIO"),
+        sword: document.createElement("AUDIO"),
+    };
+	
+    // Initialize all sounds from files
+    gSounds.counter.src = "sounds/Counter.mp3";
+    gSounds.cucumber.src = "sounds/Cucumber.mp3";
+    gSounds.hit.src = "sounds/Hit.mp3";
+    gSounds.kenjiDeath.src = "sounds/KenjiDeath.mp3";
+    gSounds.kenjiHurt.src = "sounds/KenjiHurt.mp3";
+    gSounds.kenjiJump.src = "sounds/KenjiJump.mp3";
+    gSounds.kenjiWin.src = "sounds/KenjiWin.mp3";
+    gSounds.mackDeath.src = "sounds/MackDeath.mp3";
+    gSounds.mackHurt.src = "sounds/MackHurt.mp3";
+    gSounds.mackJump.src = "sounds/MackJump.mp3";
+    gSounds.mackWin.src = "sounds/MackWin.mp3";
+    gSounds.nobodyWin.src = "sounds/NobodyWin.mp3";
+    gSounds.nobodyWin2.src = "sounds/NobodyWin2.mp3";
+    gSounds.peanut.src = "sounds/Peanut.mp3";
+    gSounds.punish.src = "sounds/Punish.mp3";
+    gSounds.song.src = "sounds/Song.mp3";
+    gSounds.sword.src = "sounds/Sword.mp3";
+
     // Declare all images as image objects in a global textures object
     let gTextures = {
         background: new Image(1024, 576),
@@ -173,7 +213,7 @@
         
         ctx.textAlign = 'left';
         ctx.font = gFonts.small;
-        ctx.fillStyle = 'blue';
+        ctx.fillStyle = 'LightSkyBlue';
         ctx.fillText("FPS: " + fps, 20*SCALE_FACTOR_WIDTH, 20*SCALE_FACTOR_HEIGHT);
     }
 

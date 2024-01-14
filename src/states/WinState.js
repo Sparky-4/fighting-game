@@ -9,6 +9,20 @@ class WinState{
         this.winner = params[2];
         this.time = params[3];
         this.shopAnim = new Animation([0, 1, 2, 3, 4, 5], 6);
+        setTimeout(function() {
+
+            if(params[2] == 'Kenji')
+                gSounds.kenjiWin.play();
+            else if (params[2] == 'Mack')
+                gSounds.mackWin.play();
+            else{
+                if(Math.random() < .1) 
+                    gSounds.nobodyWin2.play();
+                else
+                    gSounds.nobodyWin.play();
+            }
+        }, 500);
+
     }
 
     /*
@@ -31,7 +45,7 @@ class WinState{
         this.player.draw();
 		this.enemy.draw();
 
-         //Timer
+        //Timer
         ctx.fillStyle = 'white';
         ctx.strokeRect(460.8*SCALE_FACTOR_WIDTH, 23.04*SCALE_FACTOR_HEIGHT, 102.4*SCALE_FACTOR_WIDTH, 40.32*SCALE_FACTOR_HEIGHT);
         ctx.textAlign = 'center';
