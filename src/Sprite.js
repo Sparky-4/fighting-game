@@ -134,7 +134,7 @@ class Sprite {
                 this.display.frames = 40;
             }else if (this.forwardHitbox.recovery > 0){
                 let toPlay = document.createElement("AUDIO");
-                if(Math.random() < .1)
+                if(Math.random() < .2)
                     toPlay.src = gSounds.peanut.src;
                 else
                     toPlay.src = gSounds.punish.src;
