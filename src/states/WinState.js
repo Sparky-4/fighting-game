@@ -16,7 +16,7 @@ class WinState{
             else if (params[2] == 'Mack')
                 gSounds.mackWin.play();
             else{
-                if(Math.random() < .1) 
+                if(Math.random() < .5) 
                     gSounds.nobodyWin2.play();
                 else
                     gSounds.nobodyWin.play();
