@@ -32,6 +32,8 @@ class WinState{
         if(keys[13])
             location.reload();
         this.shopAnim.update();
+        this.enemy.update();
+        this.player.update();
     }
 
     /*

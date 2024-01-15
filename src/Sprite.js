@@ -74,7 +74,7 @@ class Sprite {
         if (this.position.y + this.height + this.velocity.y > VIRTUAL_HEIGHT-96) {
             this.position.y = VIRTUAL_HEIGHT-96 - this.height;
             this.velocity.y = 0;
-            if (keys[this.moveKeys.up]){
+            if (keys[this.moveKeys.up] && this.health > 0){
                 let jump = document.createElement("AUDIO");
                 jump.src = this.sounds.jump.src;
                 jump.play();
@@ -86,7 +86,8 @@ class Sprite {
             }
         }
         this.position.y += this.velocity.y;
-
+        if(this.health == 0)
+            return;
         // changes in x position, which is looking for 'left' and 'right' presses
         if(this.hitstun == 0 && this.forwardHitbox.recovery == 0){
             if (keys[this.moveKeys.right]) {
@@ -188,8 +189,10 @@ class Sprite {
         //     this.height = this.crouchedHeight;
         // else
         //     this.height = this.standingHeight;
-
         this.handleMovement();
+
+        if(this.health == 0)
+            return;
         
         if(keys[this.moveKeys.attack] && this.forwardHitbox.startup == 0 && this.forwardHitbox.recovery == 0 && this.hitstun == 0){
             this.forwardHitbox.startup = 15;
