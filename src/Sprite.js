@@ -52,15 +52,11 @@ class Sprite {
     }
 
     end(result){
-        this.hitstun = 0;
-        this.velocity.x = 0;
-        this.forwardHitbox.isAttacking = false;
-        this.forwardHitbox.recovery = 0;
-     
-        if(result == 'win'){
-            this.curAnimation = this.animations.idle;
-        }
-        else if(result == 'lost'){
+        if(result == 'lost'){
+            this.hitstun = 0;
+            this.velocity.x = 0;
+            this.forwardHitbox.isAttacking = false;
+            this.forwardHitbox.recovery = 0;
             this.curAnimation = this.animations.death;
             let death = document.createElement("AUDIO");
             death.src = this.sounds.death.src;
